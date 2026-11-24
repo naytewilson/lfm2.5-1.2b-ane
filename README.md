@@ -1,10 +1,10 @@
 # LFM2.5-1.2B-Instruct on the Apple Neural Engine
 
 A 4-bit Core ML build of Liquid AI's LFM2.5-1.2B-Instruct that runs every layer on the
-Apple Neural Engine (ANE) of an A18 Pro and sustains **58.1 tokens per second** of decode,
-with the qualification evidence behind each number on this page.
+Apple Neural Engine (ANE) of an A18 Pro and decodes at **58.1 tokens per second**
+(median of five runs), with the qualification evidence behind each number on this page.
 
-**Status: measured, v0.1.0 evidence release.** Placement, sustained decode across three
+**Status: measured, v0.1.0 evidence release.** Placement, decode speed across three
 context lengths, ANE power, a resident local HTTP endpoint and agreement with the source
 model are measured on one machine. The Core ML packages and the runner are not attached
 yet; see [Release assets](#release-assets). Read [Limitations](#limitations) before
@@ -20,14 +20,14 @@ greedy decoding, one token per ANE call, measured 2026-11-23 to 2026-11-24.
 
 | Measure | Result |
 |---|---|
-| Sustained decode, 256-position context (5 runs) | **58.1 tok/s median**; mean 58.56, 95% CI 52.1–65.0 (runs: 51.1, 58.1, 63.1, 63.8, 56.7) |
-| Sustained decode, 512 positions (2 runs) | 53.45 tok/s mean (56.4, 50.5) |
-| Sustained decode, 1024 positions (2 runs) | 51.45 tok/s mean (48.4, 54.5) |
+| Decode, 256-position context (5 runs of 49 tokens) | **58.1 tok/s median**; mean 58.56, 95% CI 52.1–65.0 (runs: 51.1, 58.1, 63.1, 63.8, 56.7) |
+| Decode, 512 positions (2 runs) | 53.45 tok/s mean (56.4, 50.5) |
+| Decode, 1024 positions (2 runs) | 51.45 tok/s mean (48.4, 54.5) |
 | Benchmark verdict | 9 of 9 runs valid under all six harness gates |
 | Operations planned on the ANE | **885 of 885** (100%); no CPU fallbacks for state |
 | ANE power during decode (256 positions) | 1.99 W ANE rail, 3.21 W active package; **18.1 tok/s per package watt** (29.3 per ANE watt) |
 | Memory traffic during decode | 38.7 GB/s DRAM; ANE DMA active 93.9% of the time |
-| Resident HTTP server | 56.3–57.2 tok/s per request, 0 reloads across 4 requests, 59.7 MB peak memory |
+| Resident HTTP server (OpenAI-style endpoint) | loads once: 4 requests with 0 reloads, repeated requests bit-identical, clean restart and shutdown, 59.7 MB peak memory |
 | Weights on the device | 658 MB (weight-byte ratio 0.295 in the encoding audit) |
 
 Context costs about 3 µs per position per token (fitted slope +3.02 µs/pos), so speed falls
@@ -80,7 +80,7 @@ lookup table changes decode speed sharply:
 |---|---|---|
 | 4-bit, one table per 8 rows | 14.11 ms | 70.9 tok/s |
 | 4-bit, one table per 4 rows | 15.84 ms | 63.1 tok/s |
-| 4-bit per 4 rows, 6-bit `w2` and `in_proj` (this build) | 17.22 ms | 58.1 tok/s sustained |
+| 4-bit per 4 rows, 6-bit `w2` and `in_proj` (this build) | 17.22 ms | 58.1 tok/s |
 | 4-bit, one table per row | 48.80 ms | 20.3 tok/s |
 
 One table per row is 3.46 times slower than one per 4 rows at nearly the same weight
@@ -98,7 +98,9 @@ size. Finer tables are more accurate (teacher-forced top-1 39 of 49 per row, aga
   fanless; long runs can be slower.
 - **No task benchmarks.** No standard evaluation suite (MMLU, GSM8K or similar) has been
   run on this build.
-- **Short contexts.** Programs exist for up to 1024 positions only.
+- **Short runs and short contexts.** Each speed run generates 49 tokens; long generations
+  of several hundred tokens, where a fanless chip heats up, have not been measured for
+  this build. Programs exist for up to 1024 positions only.
 - **Placement is plan-level.** See How it was measured.
 
 ## Release assets
