@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/banner.svg" alt="LFM2.5-1.2B on the Apple Neural Engine" width="100%"></p>
+
 # LFM2.5-1.2B-Instruct on the Apple Neural Engine
 
 A 4-bit Core ML build of Liquid AI's LFM2.5-1.2B-Instruct that runs every layer on the
@@ -10,8 +12,11 @@ model are measured on one machine. The Core ML packages and the runner are not a
 yet; see [Release assets](#release-assets). Read [Limitations](#limitations) before
 relying on any of it.
 
-Not affiliated with or endorsed by Liquid AI. LFM2.5 is Liquid AI's model; derivative
-files are distributed under the [LFM Open License v1.0](LICENSE). See [NOTICE.md](NOTICE.md).
+> **Credit:** [LFM2.5-1.2B-Instruct](https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct) is built and
+> released by [Liquid AI](https://www.liquid.ai). The model, its architecture and its weights
+> are their work; this repository only compiles and measures it for the Apple Neural Engine.
+> It is an independent project, not affiliated with or endorsed by Liquid AI. Derivative
+> files are distributed under the [LFM Open License v1.0](LICENSE); see [NOTICE.md](NOTICE.md).
 
 ## Results
 
