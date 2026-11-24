@@ -1,0 +1,10 @@
+{
+  "arms": 9,
+  "valid": 9,
+  "invalid": 0,
+  "verdict": "USABLE",
+  "repeat_status": "OK",
+  "thresholds": {"min_wall_s": 20, "min_cpu_s": 1.0, "max_faults": 50000},
+  "gates_active": "G1,G2,G3,G4,G5,G6",
+  "evidence": "<workspace>/bench_final/anvil-bench-20261124T033940Z"
+}

@@ -1,0 +1,156 @@
+{
+  "schema": "ane-re.209.lfm25_qualification.v1",
+  "timestampUTC": "2026-11-24T03:53:30Z",
+  "issue": null,
+  "host": {
+    "hostname": "redacted",
+    "hwModel": "Mac17,5",
+    "chip": "Apple A18 Pro",
+    "ramGB": 8,
+    "osVersion": "27.3",
+    "osBuild": "26C5047e"
+  },
+  "sourceModel": {
+    "repoId": "LiquidAI/LFM2.5-1.2B-Instruct",
+    "revision": "868df74dd56ff8a0c2ac5dbf281690c2dbebe4c9",
+    "architecture": "lfm2 (16 layers: 10 gated short-conv K=3 + 6 GQA 32/8 qk_norm, hidden=2048, ffn=8192, vocab=65536, tied_head)",
+    "sha256": {
+      "config_json": "15d6157fb6df3f8272e2fe90e18f57727ccf02a125c94469198b0f3281510185",
+      "tokenizer_json": "df1d8d5ec5d091b460562ffd545e4a5e91d17d4a0db7ebe733be34ed374377bd",
+      "model_safetensors": "1ba63d9adb03ae43581db0e136e4416febe0441aff7296397bd455fb6017f73a"
+    }
+  },
+  "compiledArtifact": {
+    "family": "mix46_g4_range",
+    "compileFlags": "--seq 1 --state-form ioDelta --palettize 4 --palette-group 4 --palette-map w2=6,in_proj=6 --range range.json --max-weight-mb 750",
+    "contextsVerified": [256, 512, 1024],
+    "semanticHashes": {
+      "c256": "ce3c07a38a7c2726",
+      "c512": "7e67aef0aa68a72d",
+      "c1024": "27249a4d2ff8665e"
+    },
+    "c256CompiledTreeSha256": "b974f4324a861ec19d628dde8b21b3f297ddb28d8fd0d488db14bb57931f961a",
+    "deviceWeightMB": 658,
+    "segments": "2 (seg00_host gather=1; seg01_dev 885 ANE ops)",
+    "anecCertificateVerdict": "VERIFIED: 13 pass, 0 fail, 0 skipped (S1,S2,G1,G2,G3,A1,A2,W1,E1,H1,H2,H3,H4)"
+  },
+  "encoding": {
+    "verdict": "PASS",
+    "lut4Ops": 67,
+    "lut6Ops": 26,
+    "affineOps": 0,
+    "weightByteRatio": 0.2946746018209966,
+    "computePlanAneOps": 885,
+    "computePlanRuntimeOps": 885,
+    "aneFraction": 1.0,
+    "stateCpuFallbackCount": 0
+  },
+  "sustained": {
+    "harness": "anvil-bench (gates G1..G6 ACTIVE, verdict USABLE, 9/9 VALID)",
+    "receiptPath": "receipts/lfm25_209_evidence/anvil_bench_receipt.json",
+    "c256ArmsTokPerSec": [51.1, 58.1, 63.1, 63.8, 56.7],
+    "c256ArmsDecodeMedianMS": [19.58, 17.22, 15.84, 15.68, 17.65],
+    "c256ArmsMaxRssKB": [41520, 41232, 41856, 41296, 41488],
+    "n": 5,
+    "medianTokPerSec": 58.1,
+    "meanTokPerSec": 58.56,
+    "stdDevTokPerSec": 5.1815,
+    "cvPercent": 8.848,
+    "ci95LowerTokPerSec": 52.13,
+    "ci95UpperTokPerSec": 64.99,
+    "c512ArmsTokPerSec": [56.4, 50.5],
+    "c512MeanTokPerSec": 53.45,
+    "c1024ArmsTokPerSec": [48.4, 54.5],
+    "c1024MeanTokPerSec": 51.45,
+    "kvSlopeUsPerPos_256_to_1024": 3.02,
+    "pureLut4ReferenceC256TokPerSec": 70.9
+  },
+  "physicalRails": {
+    "attributionTier": "RAIL_ATTRIBUTED",
+    "perOpExclusiveHardwareResidency": "UNKNOWN",
+    "c256": {
+      "verdict": "PASS",
+      "idlePkgW": 0.7655,
+      "idleAneMW": 0.0,
+      "activeAneW": 1.9851,
+      "activePkgW": 3.2058,
+      "dramGBps": 38.6836,
+      "aneAfActiveRatio": 0.9394,
+      "tokPerSecPerPkgW": 18.12,
+      "tokPerSecPerAneW": 29.27
+    },
+    "c512": {
+      "verdict": "PASS",
+      "idlePkgW": 1.4297,
+      "idleAneMW": 0.0,
+      "activeAneW": 2.0275,
+      "activePkgW": 3.1146,
+      "dramGBps": 38.0802,
+      "aneAfActiveRatio": 0.9411,
+      "tokPerSecPerPkgW": 17.16
+    },
+    "c1024": {
+      "verdict": "PASS",
+      "idlePkgW": 0.6719,
+      "idleAneMW": 0.0,
+      "activeAneW": 1.8951,
+      "activePkgW": 3.7804,
+      "dramGBps": 36.5352,
+      "aneAfActiveRatio": 0.9385,
+      "tokPerSecPerPkgW": 13.61
+    }
+  },
+  "correctness": {
+    "fp32SourceFrontendVsLiquidGreedyV1": {
+      "tokensMatched": "31/32",
+      "checkpoints": {"T1": 30930, "T2": 7, "T8": 533, "T32": 779},
+      "soleDifference": "T25: 12285 (exact FP32) vs 4908 (BF16 near-tie)"
+    },
+    "aneVsCpuSingleSegmentH4MaxAbs": 0.056640625,
+    "teacherForced49TokensVsFp32": {
+      "mix46_g4_range_c256": {"cosine": 0.9241529, "top1": "37/49", "meanKL": 0.85589, "rms": 1.04187},
+      "mix46_g1_c256": {"cosine": 0.9347593, "top1": "39/49", "meanKL": 0.55889, "ppl": 35.622}
+    },
+    "freeRunningCanonicalPrompt": {
+      "promptText": "<|startoftext|><|im_start|>user\nReply with exactly one word: four.<|im_end|>\n<|im_start|>assistant\n",
+      "generatedPrefixIds": [30930, 7, 2, 1, 1098],
+      "decodedReplyBeforeStop": "Four"
+    }
+  },
+  "fallbacks": {
+    "verdict": "PASS",
+    "gpuCpuAndGPU": {
+      "units": "cpuAndGPU",
+      "decodeMedianMS": 189.19,
+      "tokPerSec": 5.3,
+      "vsAneCosine": 0.9923912,
+      "vsAneTop1": "5/5",
+      "vsAneMeanKL": 0.00446
+    },
+    "cpuOnly": {
+      "units": "cpuOnly",
+      "decodeMedianMS": 4527.86,
+      "tokPerSec": 0.22,
+      "vsAneCosine": 0.9900522,
+      "vsAneTop1": "5/5",
+      "vsAneMeanKL": 0.00585
+    }
+  },
+  "residentEndpoint": {
+    "verdict": "PASS",
+    "command": "anec-run <compiled-dir> --model <model-dir> --units ane --serve 127.0.0.1:18926",
+    "endpoints": ["GET /health", "GET /v1/models", "POST /v1/chat/completions", "POST /shutdown"],
+    "coldReloads": 0,
+    "requestsServed": 4,
+    "peakRssMB": 59.67,
+    "stateResetIsolationVerified": true,
+    "restartAndCleanShutdownVerified": true,
+    "liveRequestThroughputTokPerSec": [56.34, 47.78, 57.17, 43.91],
+    "triageAccuracyNote": "Zero-shot 3-label CI log prompt returned exact 'NETWORK_TIMEOUT' on per-row lut4_g1 (18.5 tok/s) and 'PASS' on 4-row grouped mix46_g4_range (47.8 tok/s); factual ('Paris') and constrained ('Four') prompts matched identically on both."
+  },
+  "siliconDiscovery": {
+    "title": "A18 Pro (Mac17,5) LUT4 Palette-Group 3.4x Hardware Stream Cliff",
+    "status": "PROVEN",
+    "detail": "Holding weights (~561-572 MB) and single-segment 100% ANE placement fixed on Mac17,5 (26C5047e), --palette-group 8 + --range runs at 14.11 ms/tok (70.9 tok/s) and --palette-group 4 runs at 15.84 ms/tok (63.1 tok/s), whereas per-row --palette-group 1 drops 3.46x to 48.80 ms/tok (20.3 tok/s)."
+  }
+}

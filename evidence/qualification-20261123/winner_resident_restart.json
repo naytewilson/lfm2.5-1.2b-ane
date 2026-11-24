@@ -1,0 +1,41 @@
+{
+  "cold_reloads" : 0,
+  "context" : 256,
+  "initial_load_ms" : {
+    "seg01_dev" : 97.370028495788574
+  },
+  "model" : "lfm2.5-1.2b-instruct-ane",
+  "port" : 18926,
+  "requests" : [
+    {
+      "ane_metrics" : {
+        "cold_reloads" : 0,
+        "context" : 256,
+        "decode_median_ms" : 25.745958999999999,
+        "first_token_ms" : 365.049916,
+        "generated_token_ids" : [
+          30930,
+          7
+        ],
+        "peak_rss_bytes" : 63619072,
+        "request_index" : 1,
+        "reset_applied" : true,
+        "rss_bytes" : 63619072,
+        "sustained_tok_per_s" : 38.84104686098506,
+        "total_wall_ms" : 394.65775000000002,
+        "units" : "cpuAndNeuralEngine"
+      },
+      "completion_tokens" : 2,
+      "finish_reason" : "stop",
+      "prompt_tokens" : 17,
+      "reply_text" : "Four",
+      "request_index" : 1
+    }
+  ],
+  "requests_served" : 1,
+  "rss_end_bytes" : 63619072,
+  "rss_peak_bytes" : 63619072,
+  "rss_start_bytes" : 56967168,
+  "schema" : "anec.resident_server.v1",
+  "units" : "cpuAndNeuralEngine"
+}

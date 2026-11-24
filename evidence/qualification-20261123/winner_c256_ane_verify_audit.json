@@ -1,0 +1,139 @@
+{
+  "computePlan" : {
+    "anePreferredRuntimeShare" : 1,
+    "computeUnits" : "cpuAndNeuralEngine",
+    "functions" : [
+      {
+        "aneOpHistogram" : {
+          "add" : 62,
+          "concat" : 67,
+          "conv" : 93,
+          "layer_norm" : 45,
+          "matmul" : 24,
+          "mul" : 260,
+          "reduce_sum" : 10,
+          "reshape" : 157,
+          "silu" : 16,
+          "slice_by_index" : 109,
+          "softmax" : 6,
+          "tile" : 12,
+          "transpose" : 24
+        },
+        "anePreferredOps" : 885,
+        "aneSupportedOps" : 885,
+        "bundleName" : "seg01_dev-1ea6e10d7bc6943c.mlmodelc",
+        "compileTimeOps" : 1875,
+        "cpuOpHistogram" : {
+
+        },
+        "cpuPreferredOps" : 0,
+        "functionName" : "main",
+        "gpuPreferredOps" : 0,
+        "readStateAneOps" : 0,
+        "readStateCpuOps" : 0,
+        "runtimeOps" : 885,
+        "sliceUpdateAneOps" : 0,
+        "sliceUpdateCpuOps" : 0,
+        "totalOps" : 2760,
+        "unassignedPreferredOps" : 0,
+        "writeStateAneOps" : 0,
+        "writeStateCpuOps" : 0
+      }
+    ],
+    "hostKvMarshallingRisk" : false,
+    "stateCpuFallbackCount" : 0,
+    "totalAnePreferredOps" : 885,
+    "totalCpuPreferredOps" : 0,
+    "totalGpuPreferredOps" : 0,
+    "totalRuntimeOps" : 885,
+    "totalUnassignedOps" : 0,
+    "verdict" : "PASS"
+  },
+  "encoding" : {
+    "bundles" : [
+      {
+        "bundleKind" : "mlmodelc",
+        "bundleName" : "seg01_dev-1ea6e10d7bc6943c.mlmodelc",
+        "functions" : [
+          {
+            "compileTimeOps" : 1875,
+            "constOps" : 1782,
+            "constexprAffineDequantizeOps" : 0,
+            "constexprBlockwiseShiftScaleOps" : 0,
+            "constexprLutToDenseOps" : 93,
+            "constexprOtherOps" : 0,
+            "lut1Ops" : 0,
+            "lut2Ops" : 0,
+            "lut3Ops" : 0,
+            "lut4Ops" : 67,
+            "lut6Ops" : 26,
+            "lut8Ops" : 0,
+            "lutOtherOps" : 0,
+            "name" : "main",
+            "opset" : "ios18",
+            "readStateOps" : 0,
+            "runtimeOps" : 885,
+            "sliceUpdateOps" : 0,
+            "stateInputCount" : 0,
+            "totalOps" : 2760,
+            "writeStateOps" : 0
+          }
+        ],
+        "inferredDenseFp16Bytes" : 2340681216,
+        "treeSha256" : "82bf61abe7ae8bc14ccfa33e312e81c14796110f896eccf922059756c544ca12",
+        "weightBytes" : 689992320
+      }
+    ],
+    "compileTimeOps" : 1875,
+    "constexprAffineDequantizeOps" : 0,
+    "constexprBlockwiseShiftScaleOps" : 0,
+    "constexprLutToDenseOps" : 93,
+    "denseFp16Bytes" : 2341539840,
+    "denseFp16BytesSource" : "explicit",
+    "expectation" : {
+      "allowAffineOps" : 0,
+      "allowMixedLut" : true,
+      "denseFp16Bytes" : 2341539840,
+      "expectedEncoding" : "lut4",
+      "maxLut4ByteRatio" : 0.32
+    },
+    "failures" : [
+
+    ],
+    "lut4Ops" : 67,
+    "lut6Ops" : 26,
+    "lut8Ops" : 0,
+    "lutSub4Ops" : 0,
+    "readStateOps" : 0,
+    "runtimeOps" : 885,
+    "schema" : "ane.verify.encoding.v1",
+    "sliceUpdateOps" : 0,
+    "stateInputCount" : 0,
+    "targetPath" : "<workspace>\/compiled\/mix46_g4_range_c256\/.compiled",
+    "totalOps" : 2760,
+    "totalWeightBytes" : 689992320,
+    "treeSha256" : "b974f4324a861ec19d628dde8b21b3f297ddb28d8fd0d488db14bb57931f961a",
+    "verdict" : "PASS",
+    "weightByteRatio" : 0.2946746018209966,
+    "writeStateOps" : 0
+  },
+  "host" : "redacted",
+  "hwModel" : "Mac17,5",
+  "osBuild" : "26C5047e",
+  "schema" : "ane.verify.audit.v1",
+  "spiSurface" : {
+    "countersReached" : 25,
+    "countersReadable" : 25,
+    "countersTotal" : 25,
+    "enableKeysReached" : 9,
+    "enableKeysTotal" : 9,
+    "liveMaskEnabled" : false,
+    "osBuild" : "Version 27.3 (Build 26C5047e)",
+    "perfStatsClassPresent" : true,
+    "perfStatsIOSurfaceClassPresent" : true,
+    "verdict" : "REACHABILITY_PROVEN_READONLY_MASK_OFF",
+    "zinDecodersReached" : 6
+  },
+  "timestampUTC" : "2026-11-24T03:39:40Z",
+  "verdict" : "PASS"
+}

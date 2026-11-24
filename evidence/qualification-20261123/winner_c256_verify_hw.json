@@ -1,0 +1,85 @@
+{
+  "checks" : [
+    {
+      "claim" : "config.json is the certified source",
+      "detail" : "sha256 15d6157fb6df3f82…",
+      "id" : "S1",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "every consumed source tensor matches its certified hash",
+      "detail" : "148 tensors",
+      "id" : "S2",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "semantic.json \/ plan.json match certified hashes",
+      "detail" : "file hashes",
+      "id" : "G1",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "source program is well typed and has the certified structural hash",
+      "detail" : "923 nodes, hash ce3c07a38a7c2726…",
+      "id" : "G2",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "the source program reads only certified source tensors",
+      "detail" : "ok",
+      "id" : "G3",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "artifact files match certified hashes",
+      "detail" : "all packages",
+      "id" : "A1",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "every package re-parses and is well typed (types re-derived per op)",
+      "detail" : "1 packages, 45 norm idioms lifted",
+      "id" : "A2",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "every weight blob is the declared function of a certified source tensor",
+      "detail" : "148 blob refs, 658 MB, 0 constant tables checked by E1 instead, 93 palettized (worst relL2 0.12518625, recomputed)",
+      "id" : "W1",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "lifted artifact pipeline == source program, bit for bit, on verifier-chosen inputs",
+      "detail" : "2 trials, 131072 output elements bit-identical, 22 persistent states identical after 2 chained calls (nonce a5d1873391669175)",
+      "id" : "E1",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "hardware evidence is bound to these artifacts",
+      "detail" : "per-segment oracle records match artifact hashes",
+      "id" : "H1",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "hardware evidence is current for the expected OS build",
+      "detail" : "build matches",
+      "id" : "H2",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "placement recomputed from evidence rows",
+      "detail" : "885\/885 compute ops ANE-preferred (100.0%)",
+      "id" : "H3",
+      "status" : "PASS"
+    },
+    {
+      "claim" : "device executed every segment (ANE vs CPU-only outputs recorded)",
+      "detail" : "max |ANE - CPU| over segments = 0.056640625",
+      "id" : "H4",
+      "status" : "PASS"
+    }
+  ],
+  "nonce" : "a5d1873391669175",
+  "schema" : "anec.verify.v1",
+  "verifierVersion" : "0.2"
+}

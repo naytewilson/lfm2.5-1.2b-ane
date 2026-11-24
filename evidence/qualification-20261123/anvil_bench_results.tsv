@@ -1,0 +1,10 @@
+arm	status	result	wall_s	cpu_s	major_faults	maxrss_kb
+lfm25-c256-sustained-1	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=37.6 | decode_ms_med=19.58 | tok_per_s_indicative=51.1 |	26	3.860	157	41520
+lfm25-c256-sustained-2	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=39.1 | decode_ms_med=17.22 | tok_per_s_indicative=58.1 |	26	3.100	63	41232
+lfm25-c256-sustained-3	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=39.2 | decode_ms_med=15.84 | tok_per_s_indicative=63.1 |	26	2.850	71	41856
+lfm25-c256-sustained-4	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=39.2 | decode_ms_med=15.68 | tok_per_s_indicative=63.8 |	25	2.630	63	41296
+lfm25-c256-sustained-5	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=35.5 | decode_ms_med=17.65 | tok_per_s_indicative=56.7 |	26	3.160	64	41488
+lfm25-c512-sustained-1	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=49.4 | decode_ms_med=17.72 | tok_per_s_indicative=56.4 |	26	3.280	86	51360
+lfm25-c512-sustained-2	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=52.2 | decode_ms_med=19.80 | tok_per_s_indicative=50.5 |	26	3.780	503	56784
+lfm25-c1024-sustained-1	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=68.4 | decode_ms_med=20.65 | tok_per_s_indicative=48.4 |	26	3.960	73	76944
+lfm25-c1024-sustained-2	VALID	| stateful decode | segments=2 | units=cpuAndNeuralEngine | steps=49 | first_ms=74.2 | decode_ms_med=18.36 | tok_per_s_indicative=54.5 |	25	3.260	64	82432

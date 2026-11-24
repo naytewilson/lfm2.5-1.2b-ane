@@ -1,0 +1,114 @@
+{
+  "cold_reloads" : 0,
+  "context" : 256,
+  "initial_load_ms" : {
+    "seg01_dev" : 546.13304138183594
+  },
+  "model" : "lfm2.5-1.2b-instruct-ane",
+  "port" : 18926,
+  "requests" : [
+    {
+      "ane_metrics" : {
+        "cold_reloads" : 0,
+        "context" : 256,
+        "decode_median_ms" : 17.749625000000002,
+        "first_token_ms" : 376.56441699999999,
+        "generated_token_ids" : [
+          30930,
+          7
+        ],
+        "peak_rss_bytes" : 61259776,
+        "request_index" : 1,
+        "reset_applied" : true,
+        "rss_bytes" : 61259776,
+        "sustained_tok_per_s" : 56.339218434192269,
+        "total_wall_ms" : 394.40070900000001,
+        "units" : "cpuAndNeuralEngine"
+      },
+      "completion_tokens" : 2,
+      "finish_reason" : "stop",
+      "prompt_tokens" : 17,
+      "reply_text" : "Four",
+      "request_index" : 1
+    },
+    {
+      "ane_metrics" : {
+        "cold_reloads" : 0,
+        "context" : 256,
+        "decode_median_ms" : 21.021042000000001,
+        "first_token_ms" : 1519.5164580000001,
+        "generated_token_ids" : [
+          557,
+          10156,
+          7
+        ],
+        "peak_rss_bytes" : 62308352,
+        "request_index" : 2,
+        "reset_applied" : true,
+        "rss_bytes" : 62308352,
+        "sustained_tok_per_s" : 47.778070099936677,
+        "total_wall_ms" : 1564.016208,
+        "units" : "cpuAndNeuralEngine"
+      },
+      "completion_tokens" : 3,
+      "finish_reason" : "stop",
+      "prompt_tokens" : 70,
+      "reply_text" : "PASS",
+      "request_index" : 2
+    },
+    {
+      "ane_metrics" : {
+        "cold_reloads" : 0,
+        "context" : 256,
+        "decode_median_ms" : 17.490791000000002,
+        "first_token_ms" : 359.71812499999999,
+        "generated_token_ids" : [
+          30930,
+          7
+        ],
+        "peak_rss_bytes" : 62357504,
+        "request_index" : 3,
+        "reset_applied" : true,
+        "rss_bytes" : 62357504,
+        "sustained_tok_per_s" : 57.172943179070629,
+        "total_wall_ms" : 377.28745800000002,
+        "units" : "cpuAndNeuralEngine"
+      },
+      "completion_tokens" : 2,
+      "finish_reason" : "stop",
+      "prompt_tokens" : 17,
+      "reply_text" : "Four",
+      "request_index" : 3
+    },
+    {
+      "ane_metrics" : {
+        "cold_reloads" : 0,
+        "context" : 256,
+        "decode_median_ms" : 22.774958000000002,
+        "first_token_ms" : 459.52616599999999,
+        "generated_token_ids" : [
+          41677,
+          7
+        ],
+        "peak_rss_bytes" : 62570496,
+        "request_index" : 4,
+        "reset_applied" : true,
+        "rss_bytes" : 62570496,
+        "sustained_tok_per_s" : 43.907874605081595,
+        "total_wall_ms" : 482.57070800000002,
+        "units" : "cpuAndNeuralEngine"
+      },
+      "completion_tokens" : 2,
+      "finish_reason" : "stop",
+      "prompt_tokens" : 22,
+      "reply_text" : "Paris",
+      "request_index" : 4
+    }
+  ],
+  "requests_served" : 4,
+  "rss_end_bytes" : 62570496,
+  "rss_peak_bytes" : 62570496,
+  "rss_start_bytes" : 54706176,
+  "schema" : "anec.resident_server.v1",
+  "units" : "cpuAndNeuralEngine"
+}

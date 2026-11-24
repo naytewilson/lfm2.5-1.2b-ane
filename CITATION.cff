@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If this work supports yours, cite the repository and the exact revision used. No DOI is claimed."
+type: software
+title: "lfm2.5-1.2b-ane: LFM2.5-1.2B-Instruct on the Apple Neural Engine"
+authors:
+  - family-names: Wilson
+    given-names: Nayte
+    orcid: "https://orcid.org/0009-0003-4026-8212"
+    affiliation: "Independent researcher"
+    website: "https://macbrainslabs.org"
+repository-code: "https://github.com/naytewilson/lfm2.5-1.2b-ane"
+url: "https://github.com/naytewilson/lfm2.5-1.2b-ane"
+license: other
+abstract: "A 4-bit Core ML build of LFM2.5-1.2B-Instruct placed fully on the Apple Neural Engine of an A18 Pro, with qualification evidence for placement, sustained decode speed, power and agreement with the source model. Results are bounded to one device and OS build."
