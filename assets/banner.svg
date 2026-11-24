@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="t d">
+  <title id="t">LFM2.5-1.2B on the Apple Neural Engine</title>
+  <desc id="d">Project banner: a neural-engine chip with flowing lines, and the repository title.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#141a33"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.55" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+    <clipPath id="die"><rect x="96" y="76" width="168" height="168" rx="22"/></clipPath>
+  </defs>
+  <rect width="1280" height="320" rx="28" fill="url(#bg)"/>
+  <g stroke="#2b3560" stroke-width="1" opacity="0.6">
+    <path d="M360 0V320M520 0V320M680 0V320M840 0V320M1000 0V320M1160 0V320"/>
+    <path d="M0 80H1280M0 160H1280M0 240H1280"/>
+  </g>
+  <g stroke="#5b6aa8" stroke-width="6" stroke-linecap="round">
+    <path d="M128 56V72M164 56V72M196 56V72M232 56V72"/>
+    <path d="M128 248V264M164 248V264M196 248V264M232 248V264"/>
+    <path d="M76 108H92M76 144H92M76 176H92M76 212H92"/>
+    <path d="M268 108H284M268 144H284M268 176H284M268 212H284"/>
+  </g>
+  <rect x="96" y="76" width="168" height="168" rx="22" fill="#0f1530" stroke="url(#flow)" stroke-width="4"/>
+  <g clip-path="url(#die)" fill="none" stroke="url(#flow)" stroke-linecap="round">
+    <path d="M90 130C130 100 170 160 210 130S270 110 280 120" stroke-width="7"/>
+    <path d="M90 162C130 132 170 192 210 162S270 142 280 152" stroke-width="7" opacity="0.8"/>
+    <path d="M90 194C130 164 170 224 210 194S270 174 280 184" stroke-width="7" opacity="0.55"/>
+  </g>
+  <g fill="#e6e9f5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="340" y="150" font-size="72" font-weight="700" letter-spacing="-1">LFM2.5-1.2B</text>
+    <text x="342" y="200" font-size="34" font-weight="500" fill="#aab3d6">on the Apple Neural Engine</text>
+    <text x="342" y="252" font-size="22" fill="#7f8ab8">4-bit Core ML  ·  885 / 885 ops on the ANE  ·  58.1 tok/s on an A18 Pro</text>
+  </g>
+</svg>

@@ -15,5 +15,5 @@ Modifications made to the upstream work in the Core ML packages:
 | Separate programs compiled for 256, 512 and 1024 positions |
 
 `LICENSE` is an unmodified copy of the upstream license file. This repository's
-`README.md`, `NOTICE.md`, `CITATION.cff`, `SECURITY.md` and everything under `evidence/`
+`README.md`, `NOTICE.md`, `CITATION.cff`, `SECURITY.md`, `assets/banner.svg` and everything under `evidence/`
 are original to this repository.
