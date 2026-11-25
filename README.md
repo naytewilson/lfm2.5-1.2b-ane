@@ -8,9 +8,10 @@ Apple Neural Engine (ANE) of an A18 Pro and decodes at **58.1 tokens per second*
 
 **Status: measured, v0.1.0 evidence release.** Placement, decode speed across three
 context lengths, ANE power, a resident local HTTP endpoint and agreement with the source
-model are measured on one machine. The Core ML packages and the runner are not attached
-yet; see [Release assets](#release-assets). Read [Limitations](#limitations) before
-relying on any of it.
+model are measured on one machine. The Core ML packages and the runner are attached to the
+[v0.1.0 release](https://github.com/naytewilson/lfm2.5-1.2b-ane/releases/tag/v0.1.0); see
+[Release assets](#release-assets). Read [Limitations](#limitations) before relying on any
+of it.
 
 > **Credit:** [LFM2.5-1.2B-Instruct](https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct) is built and
 > released by [Liquid AI](https://www.liquid.ai). The model, its architecture and its weights
@@ -92,6 +93,22 @@ One table per row is 3.46 times slower than one per 4 rows at nearly the same we
 size. Finer tables are more accurate (teacher-forced top-1 39 of 49 per row, against 37 of
 49 for this build), which is the trade this build makes between speed and agreement.
 
+### Longer contexts (measured, not released)
+
+The same graph compiled for 4,096 and 8,192 positions also plans **885 of 885** operations on
+the ANE. These builds used a freshly fitted range-calibration file, so they are not
+byte-identical to the released programs, and they have not been through the full
+qualification above. Measured 2026-11-25 on the same machine, greedy decoding:
+
+| Context | Decode, 3 sustained runs | Full-cache run | Peak memory (max RSS) |
+|---|---|---|---|
+| 4,096 positions | 27.8, 29.5, 28.0 tok/s | 28.2 tok/s over 4,063 steps | 249 MB |
+| 8,192 positions | 17.5, 17.7, 17.8 tok/s | 18.0 tok/s over 8,159 steps | 476 MB |
+
+Speed falls with context because every decode step reads and rewrites the attention
+caches of the six attention layers; that explanation is inferred from the scaling, not
+traced on the hardware.
+
 ## Limitations
 
 - **Accuracy is close to, not equal to, the source model.** Teacher-forced top-1 agreement
@@ -105,15 +122,43 @@ size. Finer tables are more accurate (teacher-forced top-1 39 of 49 per row, aga
   run on this build.
 - **Short runs and short contexts.** Each speed run generates 49 tokens; long generations
   of several hundred tokens, where a fanless chip heats up, have not been measured for
-  this build. Programs exist for up to 1024 positions only.
+  this build. The released programs cover up to 1024 positions; the longer contexts in
+  [Longer contexts](#longer-contexts-measured-not-released) are measured but not released.
 - **Placement is plan-level.** See How it was measured.
 
 ## Release assets
 
-Not attached yet. The qualified build is defined by its compile flags and hashes in
-[`evidence/qualification-20261123/qualification.json`](evidence/qualification-20261123/qualification.json).
-The packages and runner will be attached to the v0.1.0 release only after a rebuild from
-the public checkpoint reproduces those hashes and passes the same qualification.
+Attached to the [v0.1.0 release](https://github.com/naytewilson/lfm2.5-1.2b-ane/releases/tag/v0.1.0):
+
+| File | What it is |
+|---|---|
+| `lfm2.5-1.2b-ane-c256.tar` | Compiled program for 256 positions (the 58.1 tok/s build) |
+| `lfm2.5-1.2b-ane-c512.tar` | Compiled program for 512 positions |
+| `lfm2.5-1.2b-ane-c1024.tar` | Compiled program for 1024 positions |
+| `anec-run` | The runner (arm64 macOS command-line tool) |
+| `SHA256SUMS` | SHA-256 of each file above |
+
+The three programs were rebuilt from the public checkpoint on 2026-11-25 and are
+byte-identical, file for file, to the qualified build: semantic hashes `ce3c07a38a7c2726`
+(256), `7e67aef0aa68a72d` (512) and `27249a4d2ff8665e` (1024), matching
+[`qualification.json`](evidence/qualification-20261123/qualification.json). The runner and
+the 256-position archive were checked together on the ANE after packing ("The capital of
+France is Paris.").
+
+To run, download [`LiquidAI/LFM2.5-1.2B-Instruct`](https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct)
+(the runner reads its config, embeddings and tokenizer), then:
+
+```sh
+shasum -a 256 -c SHA256SUMS
+tar -xf lfm2.5-1.2b-ane-c256.tar
+xattr -d com.apple.quarantine anec-run 2>/dev/null; chmod +x anec-run
+./anec-run mix46_g4_range_c256 --model LFM2.5-1.2B-Instruct \
+  --tokenizer LFM2.5-1.2B-Instruct/tokenizer.json --chat 1 \
+  --prompt "What is the capital of France?" --max-tokens 64 --units ane
+```
+
+The runner is ad-hoc signed and tested only on the machine and OS build named under
+[Results](#results).
 
 ## Evidence
 
