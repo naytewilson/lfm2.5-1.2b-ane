@@ -8,7 +8,8 @@ Apple Neural Engine (ANE) of an A18 Pro and decodes at **58.1 tokens per second*
 
 **Status: measured, v0.1.0 evidence release.** Placement, decode speed across three
 context lengths, ANE power, a resident local HTTP endpoint and agreement with the source
-model are measured on one machine. The Core ML packages and the runner are attached to the
+model are measured on one machine. Core ML packages for 256, 512, 1024, 4,096 and 8,192
+positions and the runner are attached to the
 [v0.1.0 release](https://github.com/naytewilson/lfm2.5-1.2b-ane/releases/tag/v0.1.0); see
 [Release assets](#release-assets). Read [Limitations](#limitations) before relying on any
 of it.
@@ -93,17 +94,28 @@ One table per row is 3.46 times slower than one per 4 rows at nearly the same we
 size. Finer tables are more accurate (teacher-forced top-1 39 of 49 per row, against 37 of
 49 for this build), which is the trade this build makes between speed and agreement.
 
-### Longer contexts (measured, not released)
+### Longer contexts: 4,096 and 8,192 positions
 
-The same graph compiled for 4,096 and 8,192 positions also plans **885 of 885** operations on
-the ANE. These builds used a freshly fitted range-calibration file, so they are not
-byte-identical to the released programs, and they have not been through the full
-qualification above. Measured 2026-11-25 on the same machine, greedy decoding:
+Programs for 4,096 and 8,192 positions are attached to the v0.1.0 release. They use the
+same settings and the same range-calibration file as the 256 to 1024 programs (SHA-256
+`54f6a903…`), compiled on 2026-11-25 with a newer commit of the compiler (`517afdcb`; the
+256 to 1024 programs came from `b16db56a`). With that compiler the graph has 875
+operations, and all **875 of 875** are planned on the ANE. Both programs answer "The
+capital of France is Paris." when run from the packed release files with the released
+`anec-run`. They have not been through the full qualification above: no power, telemetry
+or agreement-with-source measurements. Measured 2026-11-25 on the same machine, greedy
+decoding:
 
-| Context | Decode, 3 sustained runs | Full-cache run | Peak memory (max RSS) |
+| Context | Decode, 9 sustained runs | Full-cache run | Peak memory (max RSS) |
 |---|---|---|---|
-| 4,096 positions | 27.8, 29.5, 28.0 tok/s | 28.2 tok/s over 4,063 steps | 249 MB |
-| 8,192 positions | 17.5, 17.7, 17.8 tok/s | 18.0 tok/s over 8,159 steps | 476 MB |
+| 4,096 positions | **27.0 tok/s median** (24.8 to 29.6) | 31.8 tok/s over 4,063 steps | 248 MB |
+| 8,192 positions | **17.6 tok/s median** (16.7 to 17.8) | 11.6 tok/s over 8,159 steps | 471 MB |
+
+The full-cache run fills the cache to 64 positions short of the limit and then generates
+32 tokens. At 8,192 positions it ran at 86 ms per step (median) against 56 ms in the short
+runs. It came after about 40 minutes of back-to-back runs on a fanless machine, and an
+earlier full-cache run of a test build at the same context reached 18.0 tok/s, so heat is
+the likely cause; that is inferred, not measured.
 
 Speed falls with context because every decode step reads and rewrites the attention
 caches of the six attention layers; that explanation is inferred from the scaling, not
@@ -122,8 +134,8 @@ traced on the hardware.
   run on this build.
 - **Short runs and short contexts.** Each speed run generates 49 tokens; long generations
   of several hundred tokens, where a fanless chip heats up, have not been measured for
-  this build. The released programs cover up to 1024 positions; the longer contexts in
-  [Longer contexts](#longer-contexts-measured-not-released) are measured but not released.
+  this build. The 4,096 and 8,192 programs have only placement, a short answer and speed
+  measured; see [Longer contexts](#longer-contexts-4096-and-8192-positions).
 - **Placement is plan-level.** See How it was measured.
 
 ## Release assets
@@ -135,15 +147,21 @@ Attached to the [v0.1.0 release](https://github.com/naytewilson/lfm2.5-1.2b-ane/
 | `lfm2.5-1.2b-ane-c256.tar` | Compiled program for 256 positions (the 58.1 tok/s build) |
 | `lfm2.5-1.2b-ane-c512.tar` | Compiled program for 512 positions |
 | `lfm2.5-1.2b-ane-c1024.tar` | Compiled program for 1024 positions |
+| `lfm2.5-1.2b-ane-c4096.tar` | Compiled program for 4,096 positions (added 2026-11-25) |
+| `lfm2.5-1.2b-ane-c8192.tar` | Compiled program for 8,192 positions (added 2026-11-25) |
 | `anec-run` | The runner (arm64 macOS command-line tool) |
 | `SHA256SUMS` | SHA-256 of each file above |
 
-The three programs were rebuilt from the public checkpoint on 2026-11-25 and are
+The 256, 512 and 1024 programs were rebuilt from the public checkpoint on 2026-11-25 and are
 byte-identical, file for file, to the qualified build: semantic hashes `ce3c07a38a7c2726`
 (256), `7e67aef0aa68a72d` (512) and `27249a4d2ff8665e` (1024), matching
 [`qualification.json`](evidence/qualification-20261123/qualification.json). The runner and
 the 256-position archive were checked together on the ANE after packing ("The capital of
-France is Paris.").
+France is Paris."). The 4,096 and 8,192 programs come from compiler commit `517afdcb`,
+not from `b16db56a`, so they have no earlier qualified build to match; their semantic
+hashes are `51f2bd329281347f` (4,096) and `610cbbb11f181b2c` (8,192). Each unpacks to
+`mix46_g4_range_c<positions>`; pass that folder name to `anec-run` in place of the
+256-position one below.
 
 To run, download [`LiquidAI/LFM2.5-1.2B-Instruct`](https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct)
 (the runner reads its config, embeddings and tokenizer), then:
